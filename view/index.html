@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+  </head>
+  <body>
+    <h1>
+      <span style="color: rgb(255, 136, 0)"> LAN</span>
+      -
+      <span style="color: rgb(255, 44, 29)">CHAT</span>
+    </h1>
+    <div id="namebox" style="display:block ">
+      <div id="nameform">
+        <input id="name" type="text" placeholder="Enter Your Name" />
+        <button onclick="makeOnline()">Join</button>
+      </div>
+    </div>
+    <div id="chatbox" style="display: none">
+      <div id="chatdisplay">
+        <div id="chatNames"></div>
+
+        <div id="messegeBox"></div>
+      </div>
+    </div>
+  </body>
+  <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+  <script src="index.js"></script>
+</html>
