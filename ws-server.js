@@ -1,67 +1,52 @@
 function websocket_server(io) {
   var onlineUsers = new Map();
-  var userSocketMap=new Map();
-
+  var userSocketMap = new Map();
+  var socketMap = new Map();
+  
 
 
   //io connection
   io.on("connection", function (socket) {
-
     //debug
     // console.log("Websocket Connected", socket.id);
     // console.log("room", io.sockets.adapter.rooms);
 
     //when a user entering the name
     socket.on("createRoom", (data) => {
-    
-      //creating a pair of evry possible connection in the room
-      for (let i of onlineUsers.keys()) {
-        socket.join(createPair(data.roomName, i));
-      }
 
-      //adding the user to all users chat list
-      onlineUsers.set(data.roomName,0);
-      console.log("get-check",onlineUsers.get(data.roomName));
-      
+      onlineUsers.set(data.roomName, 0);
       userSocketMap.set(socket.id, data.roomName);
+      socketMap.set( data.roomName,socket.id);
+
       io.emit("onlineUsers", { onlineUsers: Object.fromEntries(onlineUsers) });
 
       //debug
-      console.log(` ${data.roomName} is connected`);
+      console.log(` ${data.roomName} is connected at ${socket.id}`);
+
       // console.log(onlineUsers);
       // console.log(userSocketMap)
-      console.log( io.sockets.adapter.rooms);
-
+      console.log(io.sockets.adapter.rooms);
     });
 
     //when a user closes the socket
     socket.on("disconnect", (reason) => {
-      var user=userSocketMap.get(socket.id);
-      console.log(`${user} disconnected for ${reason}`);//debug
+      var user = userSocketMap.get(socket.id);
+      console.log(`${user} disconnected for ${reason}`); //debug
 
       onlineUsers.delete(user);
+      socketMap.delete(user);
       userSocketMap.delete(socket.id);
 
-      console.log( io.sockets.adapter.rooms);
+      console.log(io.sockets.adapter.rooms);
       io.emit("onlineUsers", { onlineUsers: Object.fromEntries(onlineUsers) });
-  
     });
 
-    //when a user clicks to chat
-    socket.on("joinRoom", (data) => {
-      socket.join(data.roomName);
-      console.log( io.sockets.adapter.rooms);
-    })
-    socket.on("leaveRoom", (data) => {
-      socket.leave(data.roomName);
-    })
-    
     socket.on("sendMessage", (data) => {
       console.log(data.roomName, data.message);
-      
-      io.to(data.roomName).emit("receiveMessage", data.message);
-    })
+      var destinationSocket=socketMap.get(data.roomName);
 
+      io.to(destinationSocket).emit("receiveMessage",{ sender:data.sender ,message:data.message});
+    });
   });
 
   function findRooms(rooms) {

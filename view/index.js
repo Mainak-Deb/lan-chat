@@ -1,6 +1,10 @@
 let socket = io.connect();
 var currentUser = "";
 var currentRoom = "";
+var sendMsg=`<div class="chats sender"><span>{msg}</span></div>`
+var receivedMsg=`<div class="chats receiver"><span>{msg}</span></div>`
+
+empty();
 
 function makeOnline() {
   var name = document.getElementById("name").value;
@@ -22,7 +26,11 @@ socket.on("connection", (socket) => {
 
 socket.on("onlineUsers", function (data) {
   var chatNames = MapToChats(data);
-  console.log(chatNames);
+
+    if(chatNames.length==0){
+        empty();
+    }
+  //console.log(chatNames);
 
   var allusers = ``;
   var names = document.getElementById("chatNames");
@@ -40,6 +48,9 @@ socket.on("onlineUsers", function (data) {
 
 socket.on("receiveMessage",data=>{
     console.log(data);
+    //alert(data.sender+" : "+data.message);
+    document.getElementById("msgCenter").innerHTML+=receivedMsg.replace(/\{msg}/g,data.message);
+
 })
 
 
@@ -59,12 +70,10 @@ function MapToChats(data) {
 }
 
 function joinRoom(Rname) {
-  socket.emit("leaveRoom", { roomName: currentRoom });
-  currentRoom = createPair(Rname, currentUser);
-  socket.emit("joinRoom", { roomName: currentRoom });
   document.getElementById("headname").innerHTML = Rname;
-
-  //console.log("join room ", room); //debug
+  document.getElementById("msgField").value="";
+  Notempty();
+  currentRoom =Rname;
 }
 
 function createPair(room1, room2) {
@@ -77,6 +86,16 @@ function createPair(room1, room2) {
 function sendMessage() {
     var msg=document.getElementById("msgField").value;
     console.log(msg);
+    socket.emit("sendMessage", {sender:currentUser,roomName:currentRoom,message:msg});
+    document.getElementById("msgCenter").innerHTML+=sendMsg.replace(/\{msg}/g,msg);
+    document.getElementById("msgField").value="";
+}
+
+function empty(){
+    document.getElementById("messegeBox").style.display="none";  
+}
+
+function Notempty(){
+    document.getElementById("messegeBox").style.display="block";   
     
-    socket.emit("sendMessage", {roomName:currentRoom,message:msg});
 }
