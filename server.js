@@ -1,48 +1,35 @@
 // import the necessary modules
 const express = require("express");
 const socket = require("socket.io");
+const websocket_server=require("./ws-server");
+const http_server=require("./http-server");
 
-//global important variables
+
+//global variables
 const app = express();
 const port = 3000;
 var server = app.listen(port, () => {
+  console.clear();
   console.log(`Example app listening on port ${port}`);
 });
 var io = socket(server);
-var onlineUsers = [];
+
+//middlewares
+app.use(express.static("view"));
+
 
 //http server
-app.use(express.static("view"));
-app.get("/home", (req, res) => {
-  res.sendFile("view/index.html", { root: __dirname });
-});
+http_server(app);
+
 
 //websocket server
-io.on("connection", function (socket) {
-  console.log("Websocket Connected", socket.id);
-  socket.on("createRoom", (data) => {
-    for (var i = 0; i < onlineUsers.length; i++) {
-      socket.join(createPair(data.roomName,onlineUsers[i]));
-    }
-    onlineUsers.push(data.roomName);
-    console.log(onlineUsers);
-    io.emit("onlineUsers", 
-      {onlineUsers:onlineUsers}
-    );
-    console.log(io.sockets.adapter.rooms);
-    
-  });
-});
+websocket_server(io);
 
-function findRooms(rooms) {
-  var availableRooms = [];
-  for (element of rooms.values()) {
-    availableRooms.push(element);
-  }
-  return availableRooms;
-}
-function createPair(room1, room2) {
-  var pair = [room1,room2];
-  pair.sort();
-  return String(pair[0])+":"+String(pair[1]);
-}
+
+
+
+
+
+
+
+

@@ -10,6 +10,10 @@ h1 {
   text-align: center;
   font-size: 50px;
 }
+h4 {
+  text-align: center;
+  margin-top: -40px;
+}
 #namebox {
   padding: 20px;
   border-radius: 20px;
@@ -42,43 +46,177 @@ h1 {
 #namebox div button:hover {
   background-color: rgb(83, 185, 0);
 }
-#chatdisplay{
-    display: flex;
-    width: 80vw;
-    margin: auto;
-    height: 75vh;
-    background-color: rgb(219, 154, 0);
-    border-radius: 20px;
-    padding: 10px;
-    
-    flex-direction: row;
-}
-#chatNames{
-    height: 100%;
-    width: 20%;
-    background-color: black;
-    border-radius: 20px 0px 0px 20px;
-    overflow-y: scroll;
+#chatdisplay {
+  display: flex;
+  width: 80vw;
+  margin: auto;
+  height: 75vh;
+  background-color: rgb(219, 154, 0);
+  border-radius: 20px;
+  padding: 10px;
 
+  flex-direction: row;
 }
-#messegeBox{
-    height: 100%;
-    width: 80%;
-    background-color: rgb(255, 255, 255);
-    border-radius: 0px 20px 20px 0px;
+#chatNames {
+  height: 100%;
+  width: 20%;
+  background-color: black;
+  border-radius: 20px 0px 0px 20px;
+  overflow-y: scroll;
 }
-.names{
-    width: 90%;
-    height: 50px;
-    background-color: chocolate;
-    color: crimson;
-    border-radius: 20px;
-    margin: auto;
-    margin-top: 10px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 25px;
-    cursor: pointer;
+#messegeBox {
+  height: 100%;
+  width: 80%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 0px 20px 20px 0px;
+}
+.names {
+  width: 90%;
+  height: 50px;
+  background-color: chocolate;
+  color: crimson;
+  border-radius: 20px;
+  margin: auto;
+  margin-top: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border: 1px solid rgb(255, 255, 255);
+}
+.bubble {
+  background-color: rgb(255, 80, 255);
+  color: aliceblue;
+  display: inline block;
+  text-align: center;
+  padding: 2px;
+  border-radius: 50%;
+  border: 1px solid black;
+  margin-right: 4px;
+  float: right;
+}
+
+#msgHead {
+  background-color: rgb(121, 38, 0);
+  color: rgb(253, 223, 24);
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+  font-size: 2rem;
+  border-radius: 0px 20px 0px 0px;
+}
+
+.msgCenter {
+  height: 75%;
+  background-color: antiquewhite;
+  width: 100%;
+  overflow-y: scroll;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+}
+.msgBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 12px;
+  flex-direction: row;
+  padding-left: 20px;
+}
+.inputfield {
+  display: block;
+  width: 70%;
+  height: 40px;
+}
+
+#msgField {
+  width: 100%;
+  border-radius: 10px;
+  padding-left: 15px;
+  height: 100%;
+  resize: none;
+}
+
+.inputbutton {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 20%;
+  height: 40px;
+
+  padding-top: 5px;
+}
+
+#inbut {
+  height: 100%;
+  border-radius: 50%;
+  background-color: rgb(0, 162, 0);
+  color: aliceblue;
+  cursor: pointer;
+ 
+}
+
+#attached {
+  height: 100%;
+  border-radius: 50%;
+  background-color: rgb(162, 73, 0);
+  color: aliceblue;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.headbutt {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.callbutton {
+  border-radius: 50%;
+  background-color: rgb(32, 14, 0);
+  color: rgb(79, 255, 73);
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.chats {
+  width: 100%;
+  margin-top: 5px;
+}
+.chats span {
+  color: rgb(255, 255, 255);
+  padding: 2px 8px;
+  border-radius: 10px;
+  max-width: 500px;
+  height: auto;
+}
+
+.sender {
+  display: flex;
+  justify-content: end;
+  margin-right: 20px;
+}
+.receiver {
+  display: flex;
+  justify-content: start;
+  margin-left: 20px;
+}
+
+.sender span {
+  background-color: blueviolet;
+}
+.receiver span {
+  background-color: rgb(43, 101, 226);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
 }
