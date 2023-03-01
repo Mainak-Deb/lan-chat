@@ -12,7 +12,15 @@ var server = app.listen(port, () => {
   console.clear();
   console.log(`Example app listening on port ${port}`);
 });
-var io = socket(server);
+var io = socket(server,{
+  cors: {
+          origin: "http://localhost:3000",
+          methods: ["GET", "POST"],
+          credentials: true,
+          transports: ['websocket', 'polling'],
+  },
+  allowEIO3: true
+  });
 
 //middlewares
 app.use(express.static("view"));

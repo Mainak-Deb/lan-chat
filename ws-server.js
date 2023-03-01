@@ -14,18 +14,19 @@ function websocket_server(io) {
     //when a user entering the name
     socket.on("createRoom", (data) => {
 
-      onlineUsers.set(data.roomName, 0);
+      onlineUsers.set(data.roomName, data.publicKey);
       userSocketMap.set(socket.id, data.roomName);
       socketMap.set( data.roomName,socket.id);
 
       io.emit("onlineUsers", { onlineUsers: Object.fromEntries(onlineUsers) });
 
       //debug
-      console.log(` ${data.roomName} is connected at ${socket.id}`);
+      console.log(` ${data.roomName} is connected `);
+
 
       // console.log(onlineUsers);
       // console.log(userSocketMap)
-      console.log(io.sockets.adapter.rooms);
+      //console.log(io.sockets.adapter.rooms);
     });
 
     //when a user closes the socket
@@ -37,7 +38,7 @@ function websocket_server(io) {
       socketMap.delete(user);
       userSocketMap.delete(socket.id);
 
-      console.log(io.sockets.adapter.rooms);
+      //console.log(io.sockets.adapter.rooms);
       io.emit("onlineUsers", { onlineUsers: Object.fromEntries(onlineUsers) });
     });
 

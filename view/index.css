@@ -130,6 +130,7 @@ h4 {
   background-color: antiquewhite;
   width: 100%;
   overflow-y: scroll;
+  overflow-x: hidden;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -210,6 +211,7 @@ h4 {
   border-radius: 10px;
   max-width: 500px;
   height: auto;
+  word-wrap: break-word;
 }
 
 .sender {
