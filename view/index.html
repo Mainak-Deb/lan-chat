@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>LAN-CHAT</title>
     <link rel="stylesheet" href="index.css" />
     <link
       rel="stylesheet"
@@ -27,58 +27,107 @@
       <span style="color: rgb(255, 44, 29)">CHAT</span>
     </h1>
     <h4>Welcome <span id="username"></span></h4>
-    <div id="namebox" style="display: block">
+    <div id="namebox" style="display:block ">
       <div id="nameform">
         <input id="name" type="text" placeholder="Enter Your Name" />
         <button onclick="makeOnline()">Join</button>
       </div>
     </div>
     <div id="chatbox" style="display: none">
-      <div id="chatdisplay">
+      <div id="chatdisplay" style="display: flex">
         <div id="chatNames"></div>
         <div id="messegePortion">
-        <div id="messegeBox">
-          <div id="msgHead">
-            <div id="headname" style="width: 80%; text-align: center">
-              Title
+          <div id="messegeBox">
+            <div id="msgHead">
+              <div id="headname" style="width: 80%; text-align: center">
+                Title
+              </div>
+              <div class="headbutt">
+                <button class="callbutton" onclick="startCall()" >
+                  <span class="material-symbols-outlined"> videocam </span>
+                </button>
+                <button class="callbutton">
+                  <span class="material-symbols-outlined"> add_call </span>
+                </button>
+              </div>
             </div>
-            <div class="headbutt">
-              <button class="callbutton">
-                <span class="material-symbols-outlined"> videocam </span>
-              </button>
-              <button class="callbutton">
-                <span class="material-symbols-outlined"> add_call </span>
-              </button>
+            <div class="msgCenter" id="msgCenter">
+              <div class="chats sender"><span>Hiii</span></div>
+              <div class="chats receiver"><span>Hiii</span></div>
+            </div>
+            <div class="msgBox">
+              <div class="inputfield">
+                <textarea
+                  name="msg"
+                  id="msgField"
+                  placeholder="Type a messege here"
+                ></textarea>
+              </div>
+              <div class="inputbutton">
+                <button id="attached">
+                  <span class="material-symbols-outlined"> attach_file </span>
+                </button>
+                <button id="inbut">
+                  <span
+                    class="material-symbols-outlined"
+                    onclick="sendMessage()"
+                  >
+                    send
+                  </span>
+                </button>
+              </div>
             </div>
           </div>
-          <div class="msgCenter" id="msgCenter">
-            <div class="chats sender"><span>Hiii</span></div>
-            <div class="chats receiver"><span>Hiii</span></div>
-          </div>
-          <div class="msgBox">
-            <div class="inputfield">
-              <textarea
-                name="msg"
-                id="msgField"
-                placeholder="Type a messege here"
-              ></textarea>
-            </div>
-            <div class="inputbutton">
-              <button id="attached">
-                <span class="material-symbols-outlined"> attach_file </span>
-              </button>
-              <button id="inbut">
-                <span class="material-symbols-outlined" onclick="sendMessage()"  > send </span>
-              </button>
-            </div>
-          </div>
-        </div></div>
+        </div>
       </div>
+      <div id="videoDisplay" style="display: none">
+        <div class="videoTop">
+          <div class="videoBox" id="yourVideo">
+            <video id="myVideo" autoplay></video>
+          </div>
+          <div class="videoBox" id="clientVideo">
+            <video id="peerVideo" autoplay></video>
+          </div>
+        </div>
+        <div class="videoBottom">
+          <button id="offVideo" class="videoButton" onclick="videoOff()">
+            <span class="material-symbols-outlined"> videocam_off </span>
+          </button>
+          <button id="offMic" class="videoButton" onclick="micOff()">
+            <span class="material-symbols-outlined"> mic_off </span>
+          </button>
+          <button id="offMic" class="videoButton" >
+            <span class="material-symbols-outlined"> present_to_all </span>
+          </button>
+          <button class="videoButton">
+            <span class="material-symbols-outlined" onclick="cutCall()">
+              phone_disabled
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="myModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2><span id="caller-name" >Mainak</span> is calling</h2>
+        </div>
+
+        <div class="modal-footer">
+          <button  class="callButton green"  onclick="acceptCall()">Accept</button>
+          <button  class="callButton red"  onclick="declineCall()">Decline</button>
+        </div>
+      </div>
+    
     </div>
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/10.3.0/jsrsasign-all-min.js"></script>
-  <script src="rsa.js"></script>
-  <script src="Chats.js"></script>
-  <script src="index.js"></script>
-  
+  <script src="js/rsa.js"></script>
+  <script src="js/Chats.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/videoCall.js"></script>
+  <script src="js/webrtc.js"></script>
 </html>

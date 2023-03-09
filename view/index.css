@@ -57,6 +57,93 @@ h4 {
 
   flex-direction: row;
 }
+
+#videoDisplay {
+  display: flex;
+  width: 80vw;
+  margin: auto;
+  height: 75vh;
+  background-color: rgb(219, 154, 0);
+  border-radius: 20px;
+  padding: 10px;
+  flex-direction: column;
+}
+.videoTop {
+  display: flex;
+  width: 98%;
+  height: 90%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px 20px 0px 0px;
+  padding: 10px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 800;
+  color: rgb(255, 255, 255);
+}
+.videoBottom {
+  display: flex;
+  width: 98%;
+  height: 10%;
+  background-color: rgb(255, 133, 39);
+  border-radius: 0px 0px 20px 20px;
+  padding: 10px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.videoBox {
+  background-color: black;
+  width: 50%;
+  height: 90%;
+  border-radius: 20px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index:0;
+}
+.videoButton {
+  background-color: rgb(255, 47, 47);
+  color: aliceblue;
+  border-radius: 50%;
+  margin: 10px;
+  cursor: pointer;
+  padding: 5px;
+}
+.videoButton:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+#myVideo {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg); /* Safari and Chrome */
+  z-index:0;
+}
+#peerVideo {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg); /* Safari and Chrome */
+  z-index:0;
+}
+.bottomleft {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  bottom: 8px;
+  left: 16px;
+  font-size: 18px;
+  z-index: 3;
+}
+
+
+
 #chatNames {
   height: 100%;
   width: 20%;
@@ -64,7 +151,7 @@ h4 {
   border-radius: 20px 0px 0px 20px;
   overflow-y: scroll;
 }
-#messegePortion{
+#messegePortion {
   height: 100%;
   width: 80%;
   background-color: rgb(255, 255, 255);
@@ -79,8 +166,8 @@ h4 {
   background-color: rgb(255, 255, 255);
   border-radius: 0px 20px 20px 0px;
 }
-.vanish{
-  color:black;
+.vanish {
+  color: black;
   font-size: 40px;
 }
 .names {
@@ -174,7 +261,6 @@ h4 {
   background-color: rgb(0, 162, 0);
   color: aliceblue;
   cursor: pointer;
- 
 }
 
 #attached {
@@ -234,4 +320,112 @@ h4 {
 
 .material-symbols-outlined {
   font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
+}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  border-radius: 40px;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+  border-radius: 40px 40px 0px 0px;
+  text-align: center;
+}
+
+.modal-body {
+  padding: 2px 16px;
+}
+
+.modal-footer {
+  padding: 2px 26px;
+  background-color: #ffffff;
+  color: rgb(121, 0, 0);
+  border-radius: 0px 0px 40px 40px;
+  text-align: center;
+}
+
+.callButton {
+  border-radius: 10px;
+  margin: 20px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 25px;
+  color: white;
+}
+.green {
+  background-color: rgb(0, 162, 0);
+}
+.red {
+  background-color: rgb(214, 0, 0);
+}
+.green:hover {
+  background-color: rgb(29, 250, 29);
+}
+.red:hover {
+  background-color: rgb(255, 46, 46);
 }

@@ -32,7 +32,7 @@ socket.on("connection", (socket) => {
 });
 
 socket.on("onlineUsers", function (data) {
-  //console.log(data.onlineUsers)
+  console.log(data.onlineUsers)
   keyPairs = data.onlineUsers;
 
   var chatNames = MapToChats(data);
@@ -42,7 +42,7 @@ socket.on("onlineUsers", function (data) {
   if (chatNames.length == 0) {
     empty();
   }
-  //console.log(chatNames);
+  console.log(chatNames);
 
  
 });

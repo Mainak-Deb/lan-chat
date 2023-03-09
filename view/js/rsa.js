@@ -11,6 +11,8 @@ async function createKeys() {
 }
 
 window.onload = function() {
+    // publicKey = "testPublicKey";//for debugging purposes
+    // privateKey =  "testPrivateKey";//for debugging purposes
     createKeys();
 }
 

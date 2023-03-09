@@ -18,6 +18,7 @@ function websocket_server(io) {
       userSocketMap.set(socket.id, data.roomName);
       socketMap.set( data.roomName,socket.id);
 
+      //console.log(onlineUsers);
       io.emit("onlineUsers", { onlineUsers: Object.fromEntries(onlineUsers) });
 
       //debug
@@ -48,6 +49,35 @@ function websocket_server(io) {
 
       io.to(destinationSocket).emit("receiveMessage",{ sender:data.sender ,message:data.message});
     });
+
+    socket.on("videoCall", (data) => {
+      console.log(data.roomName, data.message);
+      var destinationSocket=socketMap.get(data.roomName);
+
+      io.to(destinationSocket).emit("videoCall",{ sender:data.sender ,message:data.message,offer:data.offer});
+    });
+    socket.on("decline", (data) => {
+      var destinationSocket=socketMap.get(data.roomName);
+      io.to(destinationSocket).emit("decline",{ sender:data.sender });
+    });
+    socket.on("answer", (data) => {
+      var destinationSocket=socketMap.get(data.roomName);
+      io.to(destinationSocket).emit("answer",data.answer);
+    });
+    
+  socket.on("candidate", function (candidate, roomName) {
+    console.log("On Candidate::", roomName);
+    var destinationSocket=socketMap.get(roomName);
+    io.to(destinationSocket).emit("candidate", candidate);
+  });
+  socket.on("leave", function (roomName) {
+    console.log("On leave::", roomName);
+    var destinationSocket=socketMap.get(roomName);
+    io.to(destinationSocket).emit("leave");
+  });
+
+
+
   });
 
   function findRooms(rooms) {
